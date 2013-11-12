@@ -8,7 +8,7 @@
 require "rvm/capistrano"                                 # Load RVM's capistrano plugin.
 require "bundler/capistrano" # 集成bundler和rvm
 set :rvm_ruby_string, ENV['CAP_RVM_RUBY']                # Or whatever env you want it to run in.
-set :rvm_type, :user                                     # Copy the exact line. I really mean :user here
+set :rvm_type, :system                                     # Copy the exact line. I really mean :user here
 #set :bundle_flags,    "--deployment --verbose"          # Just for debug
 
 set :application, "shopqi"
@@ -19,9 +19,9 @@ role :db,  ENV['CAP_DB_HOST'], primary: true            # This is where Rails mi
 #role :db,  "your slave db-server here"
 
 
-set :repository,  "git://github.com/saberma/shopqi.git"
+set :repository,  "git://github.com/yakjuly/shopqi.git"
 set :scm, :git
-#set :deploy_to, "/u/apps/shopqi" # default
+set :deploy_to, "/home/yakjuly/apps/shopqi" # default
 set :deploy_via, :remote_cache # 不要每次都获取全新的repository
 set :branch, "master"
 set :user, ENV['CAP_USER']
