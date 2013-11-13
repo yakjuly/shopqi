@@ -68,8 +68,13 @@ namespace :deploy do
   task :seed do
     run "cd #{release_path} ; bundle exec rake db:seed"
   end
-
+  
+  task :write_rvm do
+    run "cd #{release_path}; touch .rvmrc; echo 'rvm use 1.9.3-p327' > .rvmrc"
+  end
 end
+
+before 'deploy:assets:precompile', 'deploy:write_rvm'
 before 'deploy:assets:precompile', 'deploy:symlink_shared'
 before 'deploy:assets:precompile', 'deploy:symlink_data' # 注意要去掉Capfile文件 load 'deploy/assets' 的注释
 after  'deploy:migrate'          , 'deploy:seed'
@@ -123,6 +128,6 @@ namespace :sitemaps do # 搜索引擎网站地图
 
 end
 after 'deploy:update_code', 'sitemaps:symlink'
-after 'sitemaps:symlink'  , 'sitemaps:refresh_sitemaps'
+#after 'sitemaps:symlink'  , 'sitemaps:refresh_sitemaps'
 
 # HOOK IMAGE http://j.mp/psRjx2

@@ -1,13 +1,13 @@
-#ActionMailer::Base.smtp_settings = {
-#  address: "smtp.163.com",
-#  port: 25,
-#  domain: "163.com",
-#  user_name: "shopqi_test@163.com",
-#  password: "666666",
-#  authentication: :plain,
-#  enable_starttls_auto: false
-#}
-
-ActionMailer::Base.sendmail_settings = {
-  location: '/usr/sbin/sendmail'
+ActionMailer::Base.smtp_settings = {
+ address: Setting.smtp.address,
+ port: Setting.smtp.port,
+ domain: Setting.smtp.domain,
+ user_name: Setting.smtp.user_name,
+ password: Setting.smtp.password,
+ authentication: :login,
+ enable_starttls_auto: true
 }
+
+# ActionMailer::Base.sendmail_settings = {
+#   location: '/usr/sbin/sendmail'
+# }
